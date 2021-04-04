@@ -1,5 +1,6 @@
 package com.eestienergia.fundraiser.domain.service;
 
+import com.eestienergia.fundraiser.domain.Basket;
 import com.eestienergia.fundraiser.domain.Product;
 import com.eestienergia.fundraiser.domain.exception.ProductNotFoundException;
 import com.eestienergia.fundraiser.domain.exception.ProductOutOfStockException;
@@ -50,7 +51,11 @@ public class ProductService {
                 .orElseThrow(() -> new ProductNotFoundException(code));
     }
 
-    public Product reduceStock(final Product product, final int quantity) {
+    public void reduceStock(final Basket basket) {
+        basket.getItems().forEach(this::reduceStock);
+    }
+
+    private Product reduceStock(final Product product, final int quantity) {
         final ProductEntity entity = getEntityByCode(product.getCode());
         if (entity.getStock() < quantity) {
             throw new ProductOutOfStockException(product.getName());

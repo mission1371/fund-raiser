@@ -14,27 +14,30 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
+import static com.eestienergia.fundraiser.domain.BasketBuilder.aBasket;
 import static com.eestienergia.fundraiser.domain.ProductBuilder.aProduct;
 import static com.eestienergia.fundraiser.persistence.ProductEntityBuilder.aProductEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class ProductServiceUnitTest {
 
-    @Mock
-    private ProductEntityRepository repository;
+    @Mock private ProductEntityRepository repository;
 
-    @Mock
-    private ProductEntityConverter converter;
+    @Mock private ProductEntityConverter converter;
 
-    @InjectMocks
-    private ProductService service;
+    @InjectMocks private ProductService service;
 
     @Test
     void shouldLoadAllProductsFromRepository() {
@@ -162,12 +165,11 @@ class ProductServiceUnitTest {
     @Test
     void shouldThrowExceptionWhenProductIsOutOfStock() {
         //given
-        final int givenQuantity = 5;
-        final ProductEntity givenProductEntity = aProductEntity().stock(4).build();
+        final ProductEntity givenProductEntity = aProductEntity().stock(0).build();
         given(repository.findByCode(any())).willReturn(givenProductEntity);
 
         // when
-        final Throwable throwable = catchThrowable(() -> service.reduceStock(aProduct().build(), givenQuantity));
+        final Throwable throwable = catchThrowable(() -> service.reduceStock(aBasket(aProduct().build())));
 
         // then
         assertThat(throwable).isInstanceOf(ProductOutOfStockException.class);
@@ -180,7 +182,7 @@ class ProductServiceUnitTest {
         given(repository.findByCode(any())).willReturn(null);
 
         // when
-        final Throwable throwable = catchThrowable(() -> service.reduceStock(aProduct().build(), 1));
+        final Throwable throwable = catchThrowable(() -> service.reduceStock(aBasket(aProduct().build())));
 
         // then
         assertThat(throwable).isInstanceOf(ProductNotFoundException.class);
@@ -190,32 +192,15 @@ class ProductServiceUnitTest {
     @Test
     void shouldReduceStock() {
         //given
-        final int givenQuantity = 5;
         final Product givenProduct = aProduct().build();
         final ProductEntity givenProductEntity = aProductEntity().stock(10).build();
         given(repository.findByCode(any())).willReturn(givenProductEntity);
 
         // when
-        service.reduceStock(givenProduct, givenQuantity);
+        service.reduceStock(aBasket(givenProduct, givenProduct, givenProduct, givenProduct, givenProduct));
 
         // then
         verify(repository).save(argThat(argument -> argument.getStock() == 5));
-    }
-
-    @Test
-    void shouldReturnProductAfterReduceStock() {
-        //given
-        final Product givenProduct = aProduct().build();
-        final ProductEntity givenProductEntity = aProductEntity().stock(10).build();
-        given(repository.findByCode(any())).willReturn(givenProductEntity);
-        given(repository.save(givenProductEntity)).willReturn(givenProductEntity);
-        given(converter.convert(givenProductEntity)).willReturn(givenProduct);
-
-        // when
-        final Product expected = service.reduceStock(aProduct().build(), 1);
-
-        // then
-        assertThat(expected).isEqualTo(givenProduct);
     }
 
     @Test

@@ -18,12 +18,8 @@ public class PaymentService {
         if (paidAmount.compareTo(basket.getTotal()) < 0) {
             throw new InsufficientBalanceException();
         }
-        basket.getItems().forEach(this::buy);
+        productService.reduceStock(basket);
         return paidAmount.subtract(basket.getTotal());
-    }
-
-    private void buy(final Product product, final int quantity) {
-        productService.reduceStock(product, quantity);
     }
 
 }

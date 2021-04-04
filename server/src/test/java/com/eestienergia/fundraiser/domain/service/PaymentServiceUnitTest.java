@@ -53,8 +53,7 @@ class PaymentServiceUnitTest {
         service.cashPayment(givenBasket, BigDecimal.valueOf(100));
 
         // then
-        verify(productService).reduceStock(givenProduct1, 1);
-        verify(productService).reduceStock(givenProduct2, 2);
+        verify(productService).reduceStock(givenBasket);
     }
 
     @Test
