@@ -1,8 +1,8 @@
-﻿TYPE,CODE,NAME,PRICE,CURRENCY_CODE,STOCK,FILE_NAME
+﻿TYPE,CODE,NAME,PRICE,CURRENCY_CODE,STOCK,IMAGE_RELATIVE_PATH
 1,CP1,Brownie,0.65,EUR,48,brownie.jpg
 1,CP2,Muffin,1,EUR,36,muffin.jpg
-1,CP3,Cake Pop,1.35,EUR,24,image-pop.jpg
-1,CP4,Apple tart,1.5,EUR,60,image-tart.jpg
+1,CP3,Cake Pop,1.35,EUR,24,cake-pop.jpg
+1,CP4,Apple tart,1.5,EUR,60,apple-tart.jpg
 1,CP5,Water,1.5,EUR,30,water.jpg
 2,DP1,Shirt,2,EUR,0,shirt.jpg
 2,DP2,Pants,3,EUR,0,pants.jpg
