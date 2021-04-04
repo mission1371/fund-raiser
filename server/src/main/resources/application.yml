@@ -11,3 +11,5 @@ spring:
     generate-ddl: false
     hibernate:
       ddl-auto: none
+
+image-repository-path: 'image-repository/'

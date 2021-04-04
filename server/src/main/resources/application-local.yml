@@ -10,5 +10,3 @@ spring:
     username: 'fund_raiser_server'
     password: 'frs123'
     url: jdbc:postgresql://localhost:5432/fund_raiser
-
-image-repository-path: 'image-repository/'
