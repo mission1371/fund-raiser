@@ -1,0 +1,21 @@
+<mat-card class="mt-3 mb-1" [matBadge]="amount ? amount : null" matBadgeSize="large">
+  <div class="d-flex mat-body-strong">
+    <span class="flex-grow-1 text-truncate">{{details.name}}</span>
+    <span class="ml-5">{{details.price | currency: details.currencyCode:'symbol'}}</span>
+  </div>
+  <div class="mat-card-subtitle">{{details.stock ? details.stock + ' left' : 'Not available'}}</div>
+  <div class="d-block" [ngClass]="details.stock === 0 ? 'out-of-stock' : ''">
+    <img class="img-thumbnail rounded-0" [src]="details.src" [alt]="details.alt" (click)="addToBasket()">
+  </div>
+  <div class="d-flex justify-content-between pt-3">
+    <button mat-flat-button color="primary" [disabled]="details.stock === 0" (click)="addToBasket()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-flat-button color="primary" [disabled]="details.stock === 0" (click)="clearProductFromBasket()">
+      <mat-icon>clear_all</mat-icon>
+    </button>
+    <button mat-flat-button color="primary" [disabled]="details.stock === 0" (click)="removeFromBasket()">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </div>
+</mat-card>

@@ -1,0 +1,18 @@
+<div *ngIf="showLoader" class="d-flex flex-wrap justify-content-center">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!showLoader && noProductAvailable" class="d-flex flex-wrap justify-content-center">
+  No product available!
+</div>
+
+<div class="d-flex flex-wrap justify-content-center">
+  <app-product
+    class="w-100 m-sm-1 m-md-2 m-lg-3"
+    *ngFor="let product of products | async"
+    [details]="product"
+    [amount]="selectedProducts[product.code]?.length"
+    (removed)="onRemove($event)"
+    (selected)="onSelect($event)"
+    (removeAll)="onRemoveAll($event)"
+  ></app-product>
+</div>

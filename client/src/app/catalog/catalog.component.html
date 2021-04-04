@@ -1,0 +1,76 @@
+<mat-accordion multi displayMode="flat">
+  <mat-expansion-panel expanded class="mb-2">
+    <mat-expansion-panel-header class="mat-elevation-z2">
+      <mat-panel-title>
+        Consumables
+      </mat-panel-title>
+      <mat-panel-description>
+        Foods & Beverages
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="pt-2">
+      <app-product-viewer
+        (selectedProductsChanged)="updateCateringTotals($event)"
+        [productType]="cateringProductType">
+      </app-product-viewer>
+    </div>
+
+  </mat-expansion-panel>
+  <mat-expansion-panel expanded class="mb-2">
+    <mat-expansion-panel-header class="mat-elevation-z2">
+      <mat-panel-title>
+        Donations
+      </mat-panel-title>
+      <mat-panel-description>
+        Toys & Cloths
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="pt-2">
+      <app-product-viewer
+        (selectedProductsChanged)="updateDonationTotals($event)"
+        [productType]="donatiblesProductType">
+      </app-product-viewer>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel hideToggle expanded disabled class="mb-2">
+    <div class="d-flex flex-column pt-2">
+
+      <ng-container *ngTemplateOutlet="subTotal; context: {items: caterings, title: 'Consumables'}"></ng-container>
+      <ng-container *ngTemplateOutlet="subTotal; context: {items: donatibles, title: 'Donations'}"></ng-container>
+
+      <div class="mat-h1 text-right">Total: {{getTotal() | currency}}</div>
+      <div class="d-flex flex-column flex-sm-row justify-content-sm-end">
+        <button mat-flat-button color="primary" class="mr-sm-3 mb-3 mb-sm-0" (click)="emptyBasket()">
+          <mat-icon>remove_shopping_cart</mat-icon>
+          Clear shopping cart
+        </button>
+        <button mat-flat-button color="primary" (click)="checkout()">
+          <mat-icon>payment</mat-icon>
+          Checkout
+        </button>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<ng-template #subTotal let-items="items" let-title="title">
+<!--TODO responsive table -->
+  <div *ngIf="items.length > 0" class="d-flex flex-row my-3">
+    <div class="mat-body-strong w-75 text-right">
+      {{title}}
+    </div>
+    <mat-divider class="mx-3" vertical></mat-divider>
+    <table class="w-25">
+      <tr *ngFor="let item of items; let i = index">
+        <!--        TODO text-truncate problem for long names-->
+        <td class="p-1 d-inline-block text-truncate">{{item.name}}</td>
+        <td class="p-1 text-right">{{item.quantity}}</td>
+        <td class="p-1 text-right">{{item.price | currency}}</td>
+        <td class="p-1 text-right">{{item.amount | currency}}</td>
+      </tr>
+    </table>
+  </div>
+
+</ng-template>

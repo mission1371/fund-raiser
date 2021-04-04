@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Checkout / Total: {{data.total | currency}}</h2>
+<mat-divider></mat-divider>
+<div mat-dialog-content class="d-flex flex-column my-4">
+  <mat-form-field class="w-100">
+    <mat-label>Paid amount</mat-label>
+    <input matInput [formControl]="control">
+    <mat-icon matSuffix>payments</mat-icon>
+    <mat-error *ngIf="control.hasError('pattern') && !control.hasError('required')">
+      Please enter correct amount
+    </mat-error>
+    <mat-error *ngIf="control.hasError('min') && !control.hasError('required')">
+      Please enter amount grater than {{data.total | currency}}
+    </mat-error>
+    <mat-error *ngIf="control.hasError('required')">
+      Amount is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <div class="w-100 text-right mat-body-strong">
+    Change: {{(control.value && data.total < control.value ? control.value - data.total : 0) | currency}}
+  </div>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions class="justify-content-end">
+  <button color="primary" mat-flat-button (click)="close()">Close</button>
+  <button color="primary" mat-flat-button (click)="pay()">Pay with cash</button>
+</div>

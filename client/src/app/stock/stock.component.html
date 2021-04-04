@@ -1,0 +1,49 @@
+<table mat-table [dataSource]="inventory" class="w-100 mat-elevation-z2">
+
+  <ng-container matColumnDef="number">
+    <th mat-header-cell *matHeaderCellDef> No.</th>
+    <td mat-cell class="w-25" *matCellDef="let i = index">{{i + 1}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name</th>
+    <td mat-cell class="w-25" *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="stock">
+    <th mat-header-cell *matHeaderCellDef> Stock</th>
+    <td mat-cell class="w-25" *matCellDef="let element"> {{element.stock}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell class="w-25" *matCellDef="let product; let i = index">
+      <div *ngIf="!product.showEditStock">
+        <button mat-icon-button (click)="increaseStock(product, 1, i)">+1</button>
+        <button mat-icon-button (click)="increaseStock(product, 5, i)">+5</button>
+        <button mat-icon-button (click)="increaseStock(product, 10, i)">+10</button>
+        <button mat-icon-button (click)="product.showEditStock = true">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="product.showEditStock">
+        <mat-form-field appearance="standard">
+          <mat-label>Enter stock</mat-label>
+          <input #input matInput type="number" (change)="product.updatedStock = input.value">
+
+          <button mat-icon-button matSuffix (click)="edit(product, product.updatedStock, i)">
+            <mat-icon>check</mat-icon>
+          </button>
+          <button mat-icon-button matSuffix (click)="product.showEditStock = false">
+            <mat-icon>close</mat-icon>
+          </button>
+
+        </mat-form-field>
+      </div>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; let i = index; columns: displayedColumns;"></tr>
+</table>
