@@ -2,6 +2,7 @@ package com.eestienergia.fundraiser.rest.exception;
 
 
 import com.eestienergia.fundraiser.domain.exception.ProductNotFoundException;
+import com.eestienergia.fundraiser.domain.exception.ProductOutOfStockException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,5 +29,11 @@ public class RestResponseExceptionHandler {
     protected ResponseEntity<RestExceptionResource> handle(final ProductNotFoundException exception) {
         log.error(exception.getMessage());
         return ResponseEntity.badRequest().body(RestExceptionResource.builder().message("Product not found.").build());
+    }
+
+    @ExceptionHandler(ProductOutOfStockException.class)
+    protected ResponseEntity<RestExceptionResource> handle(final ProductOutOfStockException exception) {
+        log.error(exception.getMessage());
+        return ResponseEntity.badRequest().body(RestExceptionResource.builder().message(exception.getMessage()).build());
     }
 }
