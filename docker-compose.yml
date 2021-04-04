@@ -24,5 +24,16 @@ services:
       - db-postgres
     networks:
       - fund-raiser-network
+  client:
+    build:
+      context: client
+      dockerfile: etc/config/docker/Dockerfile
+    container_name: fund-raiser-client
+    ports:
+      - 4200:8080
+    depends_on:
+      - server
+    networks:
+      - fund-raiser-network
 networks:
   fund-raiser-network:
