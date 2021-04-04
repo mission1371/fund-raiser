@@ -1,0 +1,16 @@
+spring:
+  config:
+    name: h2
+  jpa:
+    generate-ddl: true
+    database: h2
+    hibernate:
+      ddl-auto: update
+  h2.console.enabled: true
+  liquibase:
+    contexts: local
+    enabled: true
+  datasource:
+    username: 'sa'
+    password: ''
+    url: jdbc:h2:mem:fundraiser-local-db;DB_CLOSE_DELAY=-1
