@@ -1,11 +1,28 @@
 version: "3.8"
 services:
   db-postgres:
+    environment:
+      - POSTGRES_PASSWORD=admin
     build:
       context: postgres
       dockerfile: Dockerfile
     ports:
       - 5432:5432
     shm_size: 1g
+    networks:
+      - fund-raiser-network
+  server:
     environment:
-      - POSTGRES_PASSWORD=admin
+      - APP_PROFILE=production
+    container_name: fund-raiser-server
+    build:
+      context: server
+      dockerfile: etc/config/docker/Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - db-postgres
+    networks:
+      - fund-raiser-network
+networks:
+  fund-raiser-network:

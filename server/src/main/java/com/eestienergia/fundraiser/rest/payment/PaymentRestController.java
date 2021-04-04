@@ -5,7 +5,6 @@ import com.eestienergia.fundraiser.domain.Product;
 import com.eestienergia.fundraiser.domain.service.PaymentService;
 import com.eestienergia.fundraiser.domain.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,6 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.Map;
 
-@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/payment")

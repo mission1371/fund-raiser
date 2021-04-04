@@ -8,5 +8,5 @@ import lombok.Value;
 class InventoryRecordResource {
     String productCode;
     String name;
-    long stock;
+    int stock;
 }

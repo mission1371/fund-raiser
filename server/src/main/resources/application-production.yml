@@ -1,14 +1,14 @@
 spring:
   config:
-    name: local
+    name: production
   jpa:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   liquibase:
-    contexts: local
+    contexts: production
   datasource:
     username: 'fund_raiser_server'
     password: 'frs123'
-    url: jdbc:postgresql://localhost:5432/fund_raiser
+    url: jdbc:postgresql://db-postgres:5432/fund_raiser
 
-image-repository-path: 'image-repository/'
+image-repository-path: 'opt/app-root/src/image-repository/'

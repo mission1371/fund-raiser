@@ -43,7 +43,7 @@ class InventoryServiceUnitTest {
     @Test
     void shouldIncreaseStockOfGivenProduct() {
         // given
-        final long givenAmount = 10;
+        final int givenAmount = 10;
         final String givenCode = "CP10";
         final Product givenProduct = aProduct().build();
         final Product givenUpdatedProduct = aProduct().build();
@@ -62,7 +62,7 @@ class InventoryServiceUnitTest {
     @Test
     void shouldDUpdateStockOfGivenProduct() {
         // given
-        final long givenAmount = 10;
+        final int givenAmount = 10;
         final String givenCode = "CP10";
         final Product givenProduct = aProduct().build();
         final Product givenUpdatedProduct = aProduct().build();

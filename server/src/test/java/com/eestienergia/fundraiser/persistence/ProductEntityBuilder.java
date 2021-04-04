@@ -8,7 +8,7 @@ public class ProductEntityBuilder extends ProductEntity.ProductEntityBuilder {
         return ProductEntity.builder()
                 .stock(10)
                 .price(BigDecimal.ONE)
-                .imageRelativePath("/path")
+                .fileName("file-name")
                 .type(1L)
                 .name("name")
                 .code("code")

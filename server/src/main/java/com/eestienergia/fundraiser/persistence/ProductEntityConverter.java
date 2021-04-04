@@ -10,7 +10,7 @@ public class ProductEntityConverter {
         return Product.builder()
                 .code(entity.getCode())
                 .name(entity.getName())
-                .imageRelativePath(entity.getImageRelativePath())
+                .imageFileName(entity.getFileName())
                 .stock(entity.getStock())
                 .price(entity.getPrice())
                 .currencyCode(entity.getCurrencyCode())

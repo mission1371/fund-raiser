@@ -21,41 +21,40 @@ public class ProductEntity {
     private static final String SEQUENCE_GENERATOR_NAME = "productEntitySequenceGenerator";
 
     @Id
-    @NotNull
-    @Column(name = "ID", nullable = false)
     @SequenceGenerator(name = SEQUENCE_GENERATOR_NAME, sequenceName = SEQUENCE_NAME, allocationSize = 1)
     @GeneratedValue(generator = SEQUENCE_GENERATOR_NAME, strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @NotNull
-    @Column(name = "TYPE", nullable = false)
+    @Column(name = "TYPE")
     private Long type;
 
     @NotNull
     @Length(min = 1, max = 255)
-    @Column(name = "CODE", nullable = false)
+    @Column(name = "CODE")
     private String code;
 
     @NotNull
     @Length(min = 1, max = 1024)
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "NAME")
     private String name;
 
     @NotNull
-    @Column(name = "PRICE", nullable = false, precision = 20, scale = 2)
+    @Column(name = "PRICE", precision = 20, scale = 2)
     private BigDecimal price;
 
     @NotNull
     @Length(min = 3, max = 3)
-    @Column(name = "CURRENCY_CODE", nullable = false)
+    @Column(name = "CURRENCY_CODE")
     private String currencyCode;
 
     @Min(0)
     @NotNull
-    @Column(name = "STOCK", nullable = false)
-    private long stock;
+    @Column(name = "STOCK")
+    private int stock;
 
     @NotNull
-    @Column(name = "IMAGE_RELATIVE_PATH", nullable = false)
-    private String imageRelativePath;
+    @Length(min = 1, max = 1024)
+    @Column(name = "FILE_NAME")
+    private String fileName;
 }

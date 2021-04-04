@@ -18,7 +18,7 @@ class ProductEntityConverterUnitTest {
         final ProductEntity entity = aProductEntity()
                 .code("code")
                 .name("name")
-                .imageRelativePath("imageRelativePath")
+                .fileName("file-name")
                 .stock(10)
                 .price(BigDecimal.TEN)
                 .currencyCode("currencyCode")
@@ -30,7 +30,7 @@ class ProductEntityConverterUnitTest {
         // then
         assertThat(product.getCode()).isEqualTo(entity.getCode());
         assertThat(product.getName()).isEqualTo(entity.getName());
-        assertThat(product.getImageRelativePath()).isEqualTo(entity.getImageRelativePath());
+        assertThat(product.getImageFileName()).isEqualTo(entity.getFileName());
         assertThat(product.getStock()).isEqualTo(entity.getStock());
         assertThat(product.getPrice()).isEqualTo(entity.getPrice());
         assertThat(product.getCurrencyCode()).isEqualTo(entity.getCurrencyCode());

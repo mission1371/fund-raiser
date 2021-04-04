@@ -3,16 +3,17 @@ package com.eestienergia.fundraiser.rest.inventory;
 import com.eestienergia.fundraiser.domain.exception.UnsupportedStockOperationException;
 import com.eestienergia.fundraiser.domain.service.InventoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/inventory")
@@ -27,7 +28,7 @@ public class InventoryRestController {
     }
 
     @PutMapping
-    public InventoryRecordResource updateStock(@RequestBody @Valid @NotNull final InventoryUpdateRequestResource resource) {
+    public InventoryRecordResource updateStock(@RequestBody @Valid final InventoryUpdateRequestResource resource) {
         if (resource.getAddedStock() != null) {
             return converter.convert(service.increaseStock(resource.getProductCode(), resource.getAddedStock()));
         } else if (resource.getStock() != null) {

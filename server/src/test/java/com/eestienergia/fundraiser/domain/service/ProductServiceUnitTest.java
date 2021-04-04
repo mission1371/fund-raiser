@@ -75,7 +75,7 @@ class ProductServiceUnitTest {
         final ProductEntity givenEntity = aProductEntity().build();
         final Product givenProduct = aProduct().build();
         final String givenProductCode = "CP1";
-        given(repository.findByCode(eq(givenProductCode))).willReturn(Optional.of(givenEntity));
+        given(repository.findByCode(eq(givenProductCode))).willReturn(givenEntity);
         given(converter.convert(eq(givenEntity))).willReturn(givenProduct);
 
         // when
@@ -90,7 +90,7 @@ class ProductServiceUnitTest {
     void shouldThrowExceptionWhenCouldNotFindProduct() {
         //given
         final String givenProductCode = "CP1";
-        given(repository.findByCode(eq(givenProductCode))).willReturn(Optional.empty());
+        given(repository.findByCode(eq(givenProductCode))).willReturn(null);
 
         // when
         final Throwable throwable = catchThrowable(() -> service.getByCode(givenProductCode));
@@ -162,9 +162,9 @@ class ProductServiceUnitTest {
     @Test
     void shouldThrowExceptionWhenProductIsOutOfStock() {
         //given
-        final long givenQuantity = 5;
+        final int givenQuantity = 5;
         final ProductEntity givenProductEntity = aProductEntity().stock(4).build();
-        given(repository.findByCode(any())).willReturn(Optional.of(givenProductEntity));
+        given(repository.findByCode(any())).willReturn(givenProductEntity);
 
         // when
         final Throwable throwable = catchThrowable(() -> service.reduceStock(aProduct().build(), givenQuantity));
@@ -177,7 +177,7 @@ class ProductServiceUnitTest {
     @Test
     void shouldThrowExceptionWhenProductIsNotFoundWhileReducingStock() {
         //given
-        given(repository.findByCode(any())).willReturn(Optional.empty());
+        given(repository.findByCode(any())).willReturn(null);
 
         // when
         final Throwable throwable = catchThrowable(() -> service.reduceStock(aProduct().build(), 1));
@@ -190,10 +190,10 @@ class ProductServiceUnitTest {
     @Test
     void shouldReduceStock() {
         //given
-        final long givenQuantity = 5;
+        final int givenQuantity = 5;
         final Product givenProduct = aProduct().build();
         final ProductEntity givenProductEntity = aProductEntity().stock(10).build();
-        given(repository.findByCode(any())).willReturn(Optional.of(givenProductEntity));
+        given(repository.findByCode(any())).willReturn(givenProductEntity);
 
         // when
         service.reduceStock(givenProduct, givenQuantity);
@@ -207,7 +207,7 @@ class ProductServiceUnitTest {
         //given
         final Product givenProduct = aProduct().build();
         final ProductEntity givenProductEntity = aProductEntity().stock(10).build();
-        given(repository.findByCode(any())).willReturn(Optional.of(givenProductEntity));
+        given(repository.findByCode(any())).willReturn(givenProductEntity);
         given(repository.save(givenProductEntity)).willReturn(givenProductEntity);
         given(converter.convert(givenProductEntity)).willReturn(givenProduct);
 
@@ -231,7 +231,7 @@ class ProductServiceUnitTest {
     @Test
     void shouldThrowExceptionWhenProductIsNotFoundWhileIncreasingStock() {
         //given
-        given(repository.findByCode(any())).willReturn(Optional.empty());
+        given(repository.findByCode(any())).willReturn(null);
 
         // when
         final Throwable throwable = catchThrowable(() -> service.increaseStock(aProduct().build(), 1));
@@ -244,9 +244,9 @@ class ProductServiceUnitTest {
     @Test
     void shouldIncreaseStock() {
         //given
-        final long givenQuantity = 5;
+        final int givenQuantity = 5;
         final ProductEntity givenProductEntity = aProductEntity().stock(10).build();
-        given(repository.findByCode(any())).willReturn(Optional.of(givenProductEntity));
+        given(repository.findByCode(any())).willReturn(givenProductEntity);
 
         // when
         service.increaseStock(aProduct().build(), givenQuantity);
@@ -260,7 +260,7 @@ class ProductServiceUnitTest {
         //given
         final Product givenProduct = aProduct().build();
         final ProductEntity givenProductEntity = aProductEntity().build();
-        given(repository.findByCode(any())).willReturn(Optional.of(givenProductEntity));
+        given(repository.findByCode(any())).willReturn(givenProductEntity);
         given(repository.save(givenProductEntity)).willReturn(givenProductEntity);
         given(converter.convert(givenProductEntity)).willReturn(givenProduct);
 
@@ -284,7 +284,7 @@ class ProductServiceUnitTest {
     @Test
     void shouldThrowExceptionWhenProductIsNotFoundWhileUpdatingStock() {
         //given
-        given(repository.findByCode(any())).willReturn(Optional.empty());
+        given(repository.findByCode(any())).willReturn(null);
 
         // when
         final Throwable throwable = catchThrowable(() -> service.updateStock(aProduct().build(), 1));
@@ -297,9 +297,9 @@ class ProductServiceUnitTest {
     @Test
     void shouldUpdateStock() {
         //given
-        final long givenQuantity = 3;
+        final int givenQuantity = 3;
         final ProductEntity givenProductEntity = aProductEntity().stock(10).build();
-        given(repository.findByCode(any())).willReturn(Optional.of(givenProductEntity));
+        given(repository.findByCode(any())).willReturn(givenProductEntity);
 
         // when
         service.updateStock(aProduct().build(), givenQuantity);
@@ -313,7 +313,7 @@ class ProductServiceUnitTest {
         //given
         final Product givenProduct = aProduct().build();
         final ProductEntity givenProductEntity = aProductEntity().build();
-        given(repository.findByCode(any())).willReturn(Optional.of(givenProductEntity));
+        given(repository.findByCode(any())).willReturn(givenProductEntity);
         given(repository.save(givenProductEntity)).willReturn(givenProductEntity);
         given(converter.convert(givenProductEntity)).willReturn(givenProduct);
 

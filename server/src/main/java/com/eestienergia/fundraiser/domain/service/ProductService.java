@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -40,16 +41,16 @@ public class ProductService {
         if (products.size() != uniqueCodes.size()) {
             throw new ProductNotFoundException(uniqueCodes);
         }
-        return products.stream()
-                .map(converter::convert)
-                .collect(Collectors.toMap(Product::getCode, Function.identity()));
+        return products.stream().map(converter::convert).collect(Collectors.toMap(Product::getCode, Function.identity()));
     }
 
     public Product getByCode(final String code) {
-        return repository.findByCode(code).map(converter::convert).orElseThrow(() -> new ProductNotFoundException(code));
+        return Optional.ofNullable(repository.findByCode(code))
+                .map(converter::convert)
+                .orElseThrow(() -> new ProductNotFoundException(code));
     }
 
-    public Product reduceStock(final Product product, final long quantity) {
+    public Product reduceStock(final Product product, final int quantity) {
         final ProductEntity entity = getEntityByCode(product.getCode());
         if (entity.getStock() < quantity) {
             throw new ProductOutOfStockException(product.getName());
@@ -58,7 +59,7 @@ public class ProductService {
         return converter.convert(repository.save(entity));
     }
 
-    public Product increaseStock(final Product product, final long quantity) {
+    public Product increaseStock(final Product product, final int quantity) {
         if (quantity < 0) {
             throw new StockIncreaseException(quantity);
         }
@@ -67,7 +68,7 @@ public class ProductService {
         return converter.convert(repository.save(entity));
     }
 
-    public Product updateStock(final Product product, final long quantity) {
+    public Product updateStock(final Product product, final int quantity) {
         if (quantity < 0) {
             throw new StockUpdateException(quantity);
         }
@@ -77,6 +78,6 @@ public class ProductService {
     }
 
     private ProductEntity getEntityByCode(final String code) {
-        return repository.findByCode(code).orElseThrow(() -> new ProductNotFoundException(code));
+        return Optional.ofNullable(repository.findByCode(code)).orElseThrow(() -> new ProductNotFoundException(code));
     }
 }

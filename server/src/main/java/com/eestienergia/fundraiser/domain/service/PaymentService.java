@@ -22,7 +22,7 @@ public class PaymentService {
         return paidAmount.subtract(basket.getTotal());
     }
 
-    private void buy(final Product product, final long quantity) {
+    private void buy(final Product product, final int quantity) {
         productService.reduceStock(product, quantity);
     }
 

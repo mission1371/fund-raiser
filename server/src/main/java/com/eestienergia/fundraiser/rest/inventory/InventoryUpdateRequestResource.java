@@ -15,7 +15,7 @@ class InventoryUpdateRequestResource {
 
     @NotBlank
     private String productCode;
-    private Long stock;
-    private Long addedStock;
+    private Integer stock;
+    private Integer addedStock;
 
 }

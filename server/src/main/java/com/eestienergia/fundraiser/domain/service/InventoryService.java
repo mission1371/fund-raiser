@@ -19,12 +19,12 @@ public class InventoryService {
         return service.getProducts().stream().map(InventoryRecord::of).collect(toList());
     }
 
-    public InventoryRecord increaseStock(final String productCode, final long amount) {
+    public InventoryRecord increaseStock(final String productCode, final int amount) {
         final Product product = service.getByCode(productCode);
         return InventoryRecord.of(service.increaseStock(product, amount));
     }
 
-    public InventoryRecord updateStock(final String productCode, final long amount) {
+    public InventoryRecord updateStock(final String productCode, final int amount) {
         final Product product = service.getByCode(productCode);
         return InventoryRecord.of(service.updateStock(product, amount));
     }

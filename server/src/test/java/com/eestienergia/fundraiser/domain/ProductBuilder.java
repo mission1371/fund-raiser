@@ -8,7 +8,7 @@ public class ProductBuilder extends Product.ProductBuilder {
         return Product.builder()
                 .code("code")
                 .name("Muffin")
-                .imageRelativePath("/path")
+                .imageFileName("file-name")
                 .stock(10)
                 .price(BigDecimal.TEN)
                 .currencyCode("EUR");

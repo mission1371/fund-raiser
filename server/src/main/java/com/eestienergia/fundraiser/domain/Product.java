@@ -10,8 +10,8 @@ import java.math.BigDecimal;
 public class Product {
     String code;
     String name;
-    String imageRelativePath;
-    long stock;
+    String imageFileName;
+    int stock;
     BigDecimal price;
     String currencyCode;
 }

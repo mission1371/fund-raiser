@@ -73,7 +73,7 @@ class InventoryRestControllerUnitTest {
         // given
         final InventoryUpdateRequestResource request = new InventoryUpdateRequestResource();
         request.setProductCode("EP1");
-        request.setAddedStock(10L);
+        request.setAddedStock(10);
         given(converter.convert(any())).willReturn(aResponse());
 
         // when
@@ -96,7 +96,7 @@ class InventoryRestControllerUnitTest {
         // given
         final InventoryUpdateRequestResource request = new InventoryUpdateRequestResource();
         request.setProductCode("EP1");
-        request.setStock(10L);
+        request.setStock(10);
         given(converter.convert(any())).willReturn(aResponse());
 
         // when

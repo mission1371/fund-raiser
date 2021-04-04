@@ -27,11 +27,11 @@ class ProductEntityRepositoryIntegrationTest {
         final ProductEntity entity = entityManager.persistAndFlush(aProductEntity().build());
 
         //when
-        final Optional<ProductEntity> expected = repository.findByCode(code);
+        final ProductEntity expected = repository.findByCode(code);
 
         //then
-        assertThat(expected).isNotEmpty();
-        assertThat(expected.get()).isEqualTo(entity);
+        assertThat(expected).isNotNull();
+        assertThat(expected).isEqualTo(entity);
     }
 
     @Test

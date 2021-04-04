@@ -9,7 +9,7 @@ public class InventoryRecord {
 
     String productCode;
     String name;
-    long stock;
+    int stock;
 
     public static InventoryRecord of(final Product product) {
         return InventoryRecord.builder()

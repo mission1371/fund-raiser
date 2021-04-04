@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet author="umut.taherzadeh" id="2021-03-29_insert_products" context="development,local">
+    <changeSet author="umut.taherzadeh" id="2021-03-29_insert_products" context="development,local,production">
         <loadData encoding="UTF-8" file="./dump/initial-data.csv" tableName="PRODUCT" relativeToChangelogFile="true">
             <column index="0" name="TYPE"/>
             <column index="1" name="CODE"/>
@@ -13,7 +13,7 @@
             <column index="3" name="PRICE"/>
             <column index="4" name="CURRENCY_CODE"/>
             <column index="5" name="STOCK"/>
-            <column index="6" name="IMAGE_RELATIVE_PATH"/>
+            <column index="6" name="FILE_NAME"/>
         </loadData>
     </changeSet>
 

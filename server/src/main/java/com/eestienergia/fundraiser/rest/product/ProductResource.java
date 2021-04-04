@@ -12,7 +12,7 @@ class ProductResource {
     String name;
     String avatarUrl;
     String description;
-    long stock;
+    int stock;
     BigDecimal price;
     String currencyCode;
 }
