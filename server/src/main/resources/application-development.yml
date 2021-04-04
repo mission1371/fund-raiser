@@ -1,0 +1,12 @@
+spring:
+  config:
+    name: development
+  jpa:
+    database: h2
+  h2.console.enabled: true
+  liquibase:
+    contexts: development
+  datasource:
+    username: 'sa'
+    password: ''
+    url: jdbc:h2:mem:fundraiser-local-db;DB_CLOSE_DELAY=-1

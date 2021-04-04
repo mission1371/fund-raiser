@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  db-postgres:
+    build:
+      context: postgres
+      dockerfile: Dockerfile
+    ports:
+      - 5432:5432
+    shm_size: 1g
+    environment:
+      - POSTGRES_PASSWORD=admin

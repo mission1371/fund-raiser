@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet author="umut.taherzadeh" id="2021-03-29_insert_products" context="local,prod">
+    <changeSet author="umut.taherzadeh" id="2021-03-29_insert_products" context="development,local">
         <loadData encoding="UTF-8" file="./dump/initial-data.csv" tableName="PRODUCT" relativeToChangelogFile="true">
             <column index="0" name="TYPE"/>
             <column index="1" name="CODE"/>

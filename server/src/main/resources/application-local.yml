@@ -1,0 +1,12 @@
+spring:
+  config:
+    name: local
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    contexts: local
+  datasource:
+    username: 'fund_raiser_server'
+    password: 'frs123'
+    url: jdbc:postgresql://localhost:5432/fund_raiser
