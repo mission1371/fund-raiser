@@ -1,16 +1,16 @@
 import { browser, logging } from 'protractor';
 import { AppPage } from './app.po';
 
-describe('workspace-project App', () => {
+describe('workspace-project Fund-Raiser', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', async () => {
+  it('should have catalog', async () => {
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('client app is running!');
+    expect(await page.hasCatalog()).toBeTrue();
   });
 
   afterEach(async () => {

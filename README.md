@@ -1,22 +1,29 @@
-"# fund-raiser" 
+# Fund Raiser 
 
+    For detailed information refer to dedicated readme files under `server` and `client` folders.
 
-docker needs to be in swarm mode
+### Docker configuration
+In order for containers to communicate with each other docker needs to be running with swarm mode.
 
-docker compose runs server with local profile. 
+There is a `docker-compose.yml` file which orchestrates the containers for the application. 
+Once compose file run with `docker-compose up` it will build and run **Postgres**, **Server** and **Client** containers.
 
-before running compose you need to crease artifacts for the server and client projects.
+### Before running compose file!
+Each sub project needs to be build before compose file runs properly. Otherwise, there won't be any artifact to put it into containers. 
 
-to run all services
+- To build `Spring project` run under `server/` folder
+    
+
+    gradlew clean build
+
+- To build `Angular project` run under `client/` folder
+    
+    
+    npm install
+    npm run prod-build    
+ 
+`npm install` step can be skipped after initial successful installation
+
+After the installations run below command to start everything under `fund-raiser` folder where docker-compose.yml exist 
+
     docker-compose up
-    
-only for the postgres
-      docker-compose up db-postgres
-      
-only for the server
-    docker-compose up server
-    
-only for the client
-      docker-compose up client
-
-To update images and containers (e.g. init script for db changed) you can use `docker-compose up -d --build [service name, e.g db-oracle]`
