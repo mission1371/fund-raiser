@@ -2,6 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.6.
 
+- Stock update can be done navigating to `http://localhost:4200/stock`
+- Shopping is available under  `http://localhost:4200/catalog`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

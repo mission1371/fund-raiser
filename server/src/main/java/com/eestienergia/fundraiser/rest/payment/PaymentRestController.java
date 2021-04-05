@@ -4,6 +4,7 @@ import com.eestienergia.fundraiser.domain.Basket;
 import com.eestienergia.fundraiser.domain.Product;
 import com.eestienergia.fundraiser.domain.service.PaymentService;
 import com.eestienergia.fundraiser.domain.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ public class PaymentRestController {
     private final ProductService productService;
 
     @PostMapping("/cash")
+    @Operation(summary = "Cash payment")
     public CashPaymentResponseResource cashPayment(@RequestBody @Valid final CashPaymentRequestResource request) {
         final Map<String, Product> products = productService.getProductsById(request.getProductCodes());
         final BigDecimal change = paymentService.cashPayment(convertToBasket(request, products), request.getAmount());

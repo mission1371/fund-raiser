@@ -2,12 +2,9 @@ package com.eestienergia.fundraiser.rest.inventory;
 
 import com.eestienergia.fundraiser.domain.exception.UnsupportedStockOperationException;
 import com.eestienergia.fundraiser.domain.service.InventoryService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -23,11 +20,13 @@ public class InventoryRestController {
     private final InventoryRecordResourceConverter converter;
 
     @GetMapping
+    @Operation(summary = "Get all products with stock information")
     public List<InventoryRecordResource> getInventory() {
         return service.fetchInventory().stream().map(converter::convert).collect(toList());
     }
 
     @PutMapping
+    @Operation(summary = "Update stock of the product")
     public InventoryRecordResource updateStock(@RequestBody @Valid final InventoryUpdateRequestResource resource) {
         if (resource.getAddedStock() != null) {
             return converter.convert(service.increaseStock(resource.getProductCode(), resource.getAddedStock()));
